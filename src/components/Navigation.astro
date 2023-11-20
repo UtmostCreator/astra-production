@@ -1,0 +1,56 @@
+---
+
+---
+<header class="flex items-center flex-col mb-4">
+    <ul class="flex gap-x-8 my-4">
+        <li><a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="/">Home</a></li>
+        <li><a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="/about">About</a></li>
+        <li><a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="/blog">Blog</a></li>
+    </ul>
+    <select name="themeSwitch" id="themeSwitch" class="flex flex-end">
+        <option value="system">System</option>
+        <option value="dark">Dark</option>
+        <option value="light">Light</option>
+    </select>
+
+</header>
+
+
+<style>
+    :global(.dark) {
+        color-scheme: dark;
+        transition: background-color 1s ease, color 1s ease; /* Add transitions */
+    }
+    :global(.light) {
+        color-scheme: light;
+        transition: background-color 1s ease, color 1s ease; /* Add transitions */
+    }
+</style>
+
+<script>
+    const select = document.getElementById("themeSwitch") as HTMLSelectElement;
+    const theme = localStorage.getItem("theme");
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+
+    if (theme !== null) {
+        select.value = theme;
+    } else {
+        select.value = systemTheme;
+    }
+
+    function updateTheme(value) {
+        const theme = value === "system" ? systemTheme : value;
+        document.documentElement.classList.remove("light", "dark");
+        document.documentElement.classList.add(theme);
+        localStorage.setItem("theme", value);
+    }
+
+    updateTheme(select.value);
+
+    select.addEventListener("change", (event: Event) => {
+        const select = event.target as HTMLSelectElement;
+        updateTheme(select.value);
+    });
+</script>
