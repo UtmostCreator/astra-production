@@ -33,7 +33,7 @@ const {Content} = await post.render();
     </div>
     <div class="flex justify-between">
         <div>
-            {post.data.categories.map((category) =>
+            {post.data.categories && post.data.categories.map((category) =>
                     <div
                             class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-blue-200 text-blue-700 rounded-full ml-2"
                     >
