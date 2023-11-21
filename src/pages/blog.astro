@@ -5,7 +5,6 @@ import PostList from "../components/PostList.astro";
 
 const posts = await getCollection('posts');
 
-console.log(posts);
 ---
 <MainLayout title="Blog Title" description="Blog desc" image="img">
     <PostList posts={posts} />
