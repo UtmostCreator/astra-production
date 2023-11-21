@@ -1,6 +1,6 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import { Image } from 'astro:assets';
+import type {CollectionEntry} from 'astro:content';
+import {Image} from 'astro:assets';
 type Props = {
     post: CollectionEntry<'posts'>;
 };
@@ -11,13 +11,21 @@ const {post} = Astro.props;
 <article>
     <a href={`/blog/${post.slug}`}>
         <Image
-            src={post.data.image}
-            width={600}
-            height={600}
-            alt={post.data.title}
-            class="rounded-xl shadow-xl mb-4 aspect-thumbnail object-cover"
+                src={post.data.image}
+                width={600}
+                height={600}
+                alt={post.data.title}
+                class="rounded-xl shadow-xl mb-4 aspect-thumbnail object-cover"
         />
     </a>
+    {post.data.categories.map((category) =>
+            <div
+                    class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-blue-200 text-blue-700 rounded-full"
+            >
+                {category}
+            </div>
+    )}
+
     <a
             href={`/blog/${post.slug}`}
             class="text-4xl text-zinc-900 font-semibold inline-block"

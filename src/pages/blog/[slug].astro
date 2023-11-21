@@ -16,16 +16,36 @@ const {Content} = await post.render();
 ---
 
 <MainLayout title={post.data.title} description="some desc" image="img">
-    <h1>{post.data.title}</h1>
+    <h1 class="text-5xl text-center">{post.data.title}</h1>
     <div class="prose prose-2xl overflow-visible relative mb-20">
     </div>
-    <Image
-            src={post.data.image}
-            width={1024}
-            height={1024 / 1.8}
-            alt={post.data.title}
-            class="rounded-xl shadow-xl mb-4 aspect-thumbnail object-cover"
-    />
+    <div class="relative">
+        <Image
+                src={post.data.image}
+                width={1024}
+                height={1024 / 3 }
+                alt={post.data.title}
+                class="rounded-xl shadow-xl mb-4 aspect-thumbnail object-cover"
+        />
+        <figcaption class="absolute bottom-2 right-4 text-white text-xl font-bold">
+            {post.data.featured ? 'Trusted by Everyone' : ''}
+        </figcaption>
+    </div>
+    <div class="flex justify-between">
+        <div>
+            {post.data.categories.map((category) =>
+                    <div
+                            class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-blue-200 text-blue-700 rounded-full ml-2"
+                    >
+                        {category}
+                    </div>
+            )}
+        </div>
+        <div>
+            <time datetime={post.data.date} title={post.data.date}>{post.data.date}</time>
+            <span title={'Author:' + post.data.author}>{post.data.author}</span>
+        </div>
+    </div>
     <div class="prose prose-2xl overflow-visible relative mb-20">
         <Content/>
     </div>
